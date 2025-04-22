@@ -14,10 +14,7 @@ cmd.Parameters.AddWithValue("@Email", "joao@email.com.br");
 
 cmd.ExecuteNonQuery();
 
-
-// comentado para não dar erro de duplicidade
 Console.WriteLine("Registro inserido com sucesso!");
-
 
 
 MySqlDataReader reader = cmd.ExecuteReader();
