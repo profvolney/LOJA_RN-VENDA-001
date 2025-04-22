@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jason.vsilva\\Desktop\\LOJA\\LOJA\\LOJA_RN-VENDA-001.csproj": {}
+    "C:\\Users\\jason.vsilva\\Desktop\\LOJA\\LOJA\\LOJA.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jason.vsilva\\Desktop\\LOJA\\LOJA\\LOJA_RN-VENDA-001.csproj": {
+    "C:\\Users\\jason.vsilva\\Desktop\\LOJA\\LOJA\\LOJA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jason.vsilva\\Desktop\\LOJA\\LOJA\\LOJA_RN-VENDA-001.csproj",
-        "projectName": "LOJA_RN-VENDA-001",
-        "projectPath": "C:\\Users\\jason.vsilva\\Desktop\\LOJA\\LOJA\\LOJA_RN-VENDA-001.csproj",
+        "projectUniqueName": "C:\\Users\\jason.vsilva\\Desktop\\LOJA\\LOJA\\LOJA.csproj",
+        "projectName": "LOJA",
+        "projectPath": "C:\\Users\\jason.vsilva\\Desktop\\LOJA\\LOJA\\LOJA.csproj",
         "packagesPath": "C:\\Users\\jason.vsilva\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\jason.vsilva\\Desktop\\LOJA\\LOJA\\obj\\",
         "projectStyle": "PackageReference",
@@ -49,6 +49,12 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "MySQL.Data": {
+              "target": "Package",
+              "version": "[9.3.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
