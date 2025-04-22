@@ -28,59 +28,12 @@ CREATE SCHEMA IF NOT EXISTS `loja_rn-venda-001` DEFAULT CHARACTER SET utf8mb3 ;
 USE `LOJA_RN-VENDA-001` ;
 
 -- -----------------------------------------------------
--- Table `LOJA_RN-VENDA-001`.`Carrinho`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `LOJA_RN-VENDA-001`.`Carrinho` ;
-
-CREATE TABLE IF NOT EXISTS `LOJA_RN-VENDA-001`.`Carrinho` (
-  `idCarrinho` INT NULL AUTO_INCREMENT,
-  `Quantidade` VARCHAR(3) NOT NULL,
-  `tbClientes_idClientes` INT NOT NULL,
-  PRIMARY KEY (`idCarrinho`, `tbClientes_idClientes`),
-  CONSTRAINT `fk_Carrinho_tbClientes`
-    FOREIGN KEY (`tbClientes_idClientes`)
-    REFERENCES `LOJA_RN-VENDA-001`.`tbClientes` (`idClientes`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-CREATE INDEX `fk_Carrinho_tbClientes_idx` ON `LOJA_RN-VENDA-001`.`Carrinho` (`tbClientes_idClientes` ASC) VISIBLE;
-
-
--- -----------------------------------------------------
--- Table `LOJA_RN-VENDA-001`.`Categoria`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `LOJA_RN-VENDA-001`.`Categoria` ;
-
-CREATE TABLE IF NOT EXISTS `LOJA_RN-VENDA-001`.`Categoria` (
-  `idCategoria` INT NOT NULL AUTO_INCREMENT,
-  `Nome` VARCHAR(255) NULL,
-  PRIMARY KEY (`idCategoria`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `LOJA_RN-VENDA-001`.`tbClientes`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `LOJA_RN-VENDA-001`.`tbClientes` ;
-
-CREATE TABLE IF NOT EXISTS `LOJA_RN-VENDA-001`.`tbClientes` (
-  `idClientes` INT NULL AUTO_INCREMENT,
-  `Nome` VARCHAR(255) NOT NULL,
-  `Email` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`idClientes`))
-ENGINE = InnoDB;
-
-CREATE UNIQUE INDEX `Email_UNIQUE` ON `LOJA_RN-VENDA-001`.`tbClientes` (`Email` ASC) VISIBLE;
-
-
--- -----------------------------------------------------
 -- Table `LOJA_RN-VENDA-001`.`tbProdutos`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `LOJA_RN-VENDA-001`.`tbProdutos` ;
 
 CREATE TABLE IF NOT EXISTS `LOJA_RN-VENDA-001`.`tbProdutos` (
-  `idProdutos` INT NULL AUTO_INCREMENT,
+  `idProdutos` INT NOT NULL AUTO_INCREMENT,
   `Nome` VARCHAR(255) NOT NULL,
   `PrecoUnitario` DECIMAL NULL DEFAULT (10/2),
   `isPromocao` TINYINT(1) NULL,
@@ -120,8 +73,6 @@ CREATE TABLE IF NOT EXISTS `loja_rn-venda-001`.`tbcarrinho` (
     REFERENCES `loja_rn-venda-001`.`tbclientes` (`idClientes`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
-
-CREATE INDEX `fk_Carrinho_tbClientes_idx` ON `loja_rn-venda-001`.`tbcarrinho` (`tbClientes_idClientes` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
