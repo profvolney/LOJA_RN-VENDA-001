@@ -24,7 +24,7 @@ USE `LOJA_RN-VENDA-001` ;
 DROP TABLE IF EXISTS `LOJA_RN-VENDA-001`.`Carrinho` ;
 
 CREATE TABLE IF NOT EXISTS `LOJA_RN-VENDA-001`.`Carrinho` (
-  `idCarrinho` INT NULL AUTO_INCREMENT,
+  `idCarrinho` INT NOT NULL AUTO_INCREMENT,
   `Quantidade` VARCHAR(3) NOT NULL,
   `tbClientes_idClientes` INT NOT NULL,
   PRIMARY KEY (`idCarrinho`, `tbClientes_idClientes`),
@@ -56,7 +56,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `LOJA_RN-VENDA-001`.`tbClientes` ;
 
 CREATE TABLE IF NOT EXISTS `LOJA_RN-VENDA-001`.`tbClientes` (
-  `idClientes` INT NULL AUTO_INCREMENT,
+  `idClientes` INT NOT NULL AUTO_INCREMENT,
   `Nome` VARCHAR(255) NOT NULL,
   `Email` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`idClientes`))
@@ -71,7 +71,7 @@ CREATE UNIQUE INDEX `Email_UNIQUE` ON `LOJA_RN-VENDA-001`.`tbClientes` (`Email` 
 DROP TABLE IF EXISTS `LOJA_RN-VENDA-001`.`tbProdutos` ;
 
 CREATE TABLE IF NOT EXISTS `LOJA_RN-VENDA-001`.`tbProdutos` (
-  `idProdutos` INT NULL AUTO_INCREMENT,
+  `idProdutos` INT NOT NULL AUTO_INCREMENT,
   `Nome` VARCHAR(255) NOT NULL,
   `PrecoUnitario` DECIMAL NULL DEFAULT (10/2),
   `isPromocao` TINYINT(1) NULL,
