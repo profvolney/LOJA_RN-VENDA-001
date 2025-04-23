@@ -1,134 +1,149 @@
-﻿using MySql.Data.MySqlClient;
+﻿using LOJA_RN_VENDA_001.Data;
+using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI;
 using System.Configuration;
 
-string conexao = ConfigurationManager.ConnectionStrings["conexao"].ConnectionString;
-
-MySqlConnection mysql = new MySqlConnection(conexao);
-mysql.Open();
-
-string sql = "SELECT * FROM tbprodutos;";
-
-MySqlCommand cmd = new MySqlCommand( sql, mysql);
-
-cmd.ExecuteNonQuery();
-
-Console.WriteLine("##########################\n");
-Console.WriteLine("Bem-vindo à Loja!!!\n");
-Console.WriteLine("##########################\n");
-
+Console.WriteLine("##########################");
+Console.WriteLine("Bem-vindo à Loja!!!");
+Console.WriteLine("##########################");
 
 while (true)
-{   
-
-    Console.WriteLine("Por favor digite o seu nome: \n");
+{
+    Console.WriteLine("Por favor digite o seu nome: ");
     string nome = Console.ReadLine();
     Console.WriteLine("Seja Bem-vindo(a) " + nome);
 
-    Console.WriteLine("Escolha uma das opções abaixo: \n");
-    Console.WriteLine("0 - Sair\n");
-    Console.WriteLine("1 - Cadastrar cliente\n");
-    Console.WriteLine("2 - Buscar cliente\n");
-    Console.WriteLine("3 - Cadastrar produto\n");
-    Console.WriteLine("4 - Buscar produto\n");
-    Console.WriteLine("5 - Adicionar produto ao carrinho\n");
-    Console.WriteLine("6 - Consultar preço\n");
-    Console.WriteLine("7 - Finalizar compra\n");
+    Console.WriteLine("Escolha uma das opções abaixo: ");
+    Console.WriteLine("0 - Sair");
+    Console.WriteLine("1 - Cadastrar cliente");
+    Console.WriteLine("2 - Buscar cliente");
+    Console.WriteLine("3 - Cadastrar produto");
+    Console.WriteLine("4 - Buscar produto");
+    Console.WriteLine("5 - Adicionar produto ao carrinho");
+    Console.WriteLine("6 - Consultar preço");
+    Console.WriteLine("7 - Finalizar compra");
+    Console.WriteLine("8 - Consultar Total");
 
     string opcao = Console.ReadLine();
 
-    if (opcao == "0")
-        Console.WriteLine("Saindo... aperte uma tecla para finalizar o programa");
-        Console.ReadKey();      
 
-    if (opcao == "1")
-        Console.WriteLine("Informe o nome do cliente para cadastro...\n");
-        string nomeCliente = Console.ReadLine();
-        Console.WriteLine("Informe o email do cliente para cadastro...\n");
-        string emailCliente = Console.ReadLine();
-
-        CadastrarCliente();
-        Console.WriteLine("Cliente cadastrado com sucesso!\n");
-
-    if (opcao == "2")
-        buscarCliente();
-    
-    if(opcao == "3")
-        Console.WriteLine("Informe o nome do produto para cadastro...\n");
-        string NomeProduto = Console.ReadLine();
-        Console.WriteLine("Informe o preço do produto para cadastro...\n");    
-        string PrecoUnitario = Console.ReadLine();    
-        Console.WriteLine("Informe se o produto está em promoção (true/false)...\n");    
-        string isPromocao = Console.ReadLine();
-        Console.WriteLine("Informe o id do cliente para cadastro...\n");
-        string tbClientes_idClientes = Console.ReadLine();
-        Console.WriteLine("Informe o id da categoria do produto para cadastro...\n");
-        string Categoria_idCategoria = Console.ReadLine();
-
-        string sqlInsert = "INSERT INTO tbprodutos " +
-       "(Nome, PrecoUnitario, isPromocao, tbClientes_idClientes, " +
-       "Categoria_idCategoria) VALUES (@Nome, @PrecoUnitario, @isPromocao, " +
-       "@tbClientes_idClientes,@Categoria_idCategoria )";
-
-        MySqlCommand cmdInsert = new MySqlCommand(sqlInsert, mysql);
-
-        cmdInsert.Parameters.AddWithValue("@Nome", NomeProduto);
-        cmdInsert.Parameters.AddWithValue("@PrecoUnitario", PrecoUnitario);
-        cmdInsert.Parameters.AddWithValue("@isPromocao", isPromocao);
-        cmdInsert.Parameters.AddWithValue("@tbClientes_idClientes", tbClientes_idClientes);
-        cmdInsert.Parameters.AddWithValue("@Categoria_idCategoria", Categoria_idCategoria);
-
-        Console.WriteLine("Registro inserido com sucesso!");
-
-
-    if (opcao == "4")
+    switch (opcao)
     {
-        buscarProduto();
-    }
+        case "0":
+            Console.WriteLine("Saindo... aperte uma tecla para finalizar o programa");
+            Console.ReadKey();
+            break;
 
+        case "1":
+            CadastrarCliente();
+            Console.WriteLine("Cliente cadastrado com sucesso! ");
+            break;
 
-    void CadastrarCliente()
-    {
-        string sqlInsert = "INSERT INTO tbclientes (Nome, email) VALUES (@Nome, @Email)";
+        case "2":
+            buscarCliente();
+            break;
 
-        MySqlCommand cmdInsert = new MySqlCommand(sqlInsert, mysql);
+        case "3":
+            Console.WriteLine("Informe o nome do produto para cadastro...");
+            string NomeProduto = Console.ReadLine();
 
-        cmdInsert.Parameters.AddWithValue("@Nome", nomeCliente);
-        cmdInsert.Parameters.AddWithValue("@Email", emailCliente);
+            Console.WriteLine("Informe o preço do produto para cadastro...");
+            string PrecoUnitario = Console.ReadLine();
 
-        Console.WriteLine("Registro inserido com sucesso!");
-    }
+            Console.WriteLine("Informe se o produto está em promoção. (Digite 1 ou 0)");
+            string isPromocao = Console.ReadLine();
 
+            Console.WriteLine("Informe o id do cliente para cadastro...");
+            string tbClientes_idClientes = Console.ReadLine();
 
-    void buscarProduto()
-    {
-        Console.WriteLine("Digite o nome do produto que deseja buscar: ");
+            Console.WriteLine("Informe o id da categoria do produto para cadastro...");
+            string Categoria_idCategoria = Console.ReadLine();
 
-        string nomeProduto = Console.ReadLine();
+            string sqlInsert = "INSERT INTO tbprodutos " +
+           "(Nome, PrecoUnitario, isPromocao, tbClientes_idClientes, " +
+           "Categoria_idCategoria) VALUES (@Nome, @PrecoUnitario, @isPromocao, " +
+           "@tbClientes_idClientes,@Categoria_idCategoria )";
 
-        string sqlBusca = "SELECT * FROM tbprodutos WHERE nome LIKE @Nome";
+            string conexao = ConfigurationManager.ConnectionStrings["conexao"].ConnectionString;
+            MySqlConnection mysql = new MySqlConnection(conexao);
+            mysql.Open();
+            MySqlCommand cmdInsert = new MySqlCommand(sqlInsert, mysql);
 
-        MySqlCommand cmdBusca = new MySqlCommand(sqlBusca, mysql);
+            cmdInsert.Parameters.AddWithValue("@Nome", NomeProduto);
+            cmdInsert.Parameters.AddWithValue("@PrecoUnitario", PrecoUnitario);
+            cmdInsert.Parameters.AddWithValue("@isPromocao", isPromocao);
+            cmdInsert.Parameters.AddWithValue("@tbClientes_idClientes", tbClientes_idClientes);
+            cmdInsert.Parameters.AddWithValue("@Categoria_idCategoria", Categoria_idCategoria);
+            
+            cmdInsert.ExecuteNonQuery();
+            Console.WriteLine("Registro inserido com sucesso!");
+            break;
 
-        cmdBusca.Parameters.AddWithValue("@Nome", "%" + nomeProduto + "%");
-        MySqlDataReader readerBusca = cmdBusca.ExecuteReader();
+        case "4":
+            buscarProduto();
+            break;
 
-        if (readerBusca.HasRows)
-        {
-            while (readerBusca.Read())
+        case "5":
+            adicionarProduto();
+            break;
+        case "6":
+            break;
+        case "7":
+            break;
+        case "8":
+            Console.WriteLine("Informe o id do cliente para consulta...");
+            string tbClientes_idClientes2 = Console.ReadLine();
+            //string sqlBusca = "SELECT * FROM tbprodutos WHERE tbClientes_idClientes = @tbClientes_idClientes";
+            string sqlBusca2 = "SELECT * FROM tbcarrinho WHERE tbClientes_idClientes = @tbClientes_idClientes";
+            string conexao2 = ConfigurationManager.ConnectionStrings["conexao"].ConnectionString;
+            MySqlConnection mysql2 = new MySqlConnection(conexao2);
+            mysql2.Open();
+            MySqlCommand cmdBusca2 = new MySqlCommand(sqlBusca2, mysql2);
+            cmdBusca2.Parameters.AddWithValue("@tbClientes_idClientes", tbClientes_idClientes2);
+            MySqlDataReader readerBusca2 = cmdBusca2.ExecuteReader();
+            if (readerBusca2.HasRows)
             {
-                Console.WriteLine(readerBusca["idProdutos"].ToString() + " - " + readerBusca["nome"].ToString());
+                while (readerBusca2.Read())
+                {
+                    Console.WriteLine(readerBusca2["idCarrinho"].ToString() + " - " + readerBusca2["tbClientes_idClientes"].ToString());
+                }
             }
-        }
-        else
-        {
-            Console.WriteLine("Produto não encontrado.");
-        }
-
+            else
+            {
+                Console.WriteLine("Carrinho vazio.");
+            }
+            break;
     }
+}
 
+void adicionarProduto()
+{    
+    Console.WriteLine("Digite o produto que deseja adicionar ao carrinho: ");
+    string nomeProduto = Console.ReadLine();
 
+    string sqlBusca = "SELECT * FROM tbprodutos WHERE nome LIKE @Nome";
+    
+    string conexao = ConfigurationManager.ConnectionStrings["conexao"].ConnectionString;
+ 
+    MySqlConnection mysql = new MySqlConnection(conexao);
+    mysql.Open();
 
-
+    MySqlCommand cmdBusca = new MySqlCommand(sqlBusca, mysql);
+    cmdBusca.Parameters.AddWithValue("@Nome", "%" + nomeProduto + "%");
+    MySqlDataReader readerBusca = cmdBusca.ExecuteReader();
+    
+    if (readerBusca.HasRows)
+    {
+        while (readerBusca.Read())
+        {
+            Console.WriteLine(readerBusca["idProdutos"].ToString() + " - " + readerBusca["nome"].ToString());
+        }
+    }
+    else
+    {
+        Console.WriteLine("Produto não encontrado.");
+    }
+    readerBusca.Close();
 
     var consulta = 'S';
 
@@ -136,19 +151,55 @@ while (true)
 
     if (consulta == 'S')
     {
-        string carrinho = Console.ReadLine();
+        Console.WriteLine("Qual a quantidade?");
+        string quantidade = Console.ReadLine();
+
+        Console.WriteLine("Informe o id do cliente para cadastro...");
+        string tbClientes_idClientes = Console.ReadLine();
+
+        string sqlInsert = "INSERT INTO tbcarrinho (tbClientes_idClientes, Quantidade) " +
+            "VALUES (@tbClientes_idClientes, @Quantidade)";
+        
+        string conexao2 = ConfigurationManager.ConnectionStrings["conexao"].ConnectionString;
+        
+        MySqlConnection mysql2 = new MySqlConnection(conexao2);
+        mysql2.Open();  
+
+        MySqlCommand cmdInsert = new MySqlCommand(sqlInsert, mysql);
+        cmdInsert.Parameters.AddWithValue("@tbClientes_idClientes", tbClientes_idClientes);
+        cmdInsert.Parameters.AddWithValue("@Quantidade", quantidade);
+
+        cmdInsert.ExecuteNonQuery();
+        mysql.Close();
+        Console.WriteLine("Produto adicionado ao carrinho com sucesso!");
     }
-    else 
+    else
     {
         Console.WriteLine("Produto não adicionado ao carrinho.");
-    };
-
-        Console.WriteLine("Consultar preço...");
-
-    //string sql = "UPDATE tbclientes SET Nome = @Nome WHERE idClientes = @idClientes";
-
+    };   
 
     mysql.Close();
+}
+
+void CadastrarCliente()
+{
+    Console.WriteLine("Informe o nome do cliente para cadastro...");
+    string nomeCliente = Console.ReadLine();
+    Console.WriteLine("Informe o email do cliente para cadastro...");
+    string emailCliente = Console.ReadLine();
+
+    string sqlInsert = "INSERT INTO tbclientes (Nome, email) VALUES (@Nome, @Email)";
+
+    string conexao = ConfigurationManager.ConnectionStrings["conexao"].ConnectionString;
+    MySqlConnection mysql = new MySqlConnection(conexao);
+    mysql.Open();
+    MySqlCommand cmdInsert = new MySqlCommand(sqlInsert, mysql);
+
+    cmdInsert.Parameters.AddWithValue("@Nome", nomeCliente);
+    cmdInsert.Parameters.AddWithValue("@Email", emailCliente);
+
+    cmdInsert.ExecuteNonQuery();
+    mysql.Close();   
 }
 
 void buscarCliente()
@@ -158,6 +209,10 @@ void buscarCliente()
     string nomeCliente = Console.ReadLine();
 
     string sqlBusca = "SELECT * FROM tbclientes WHERE nome LIKE @Nome";
+
+    string conexao = ConfigurationManager.ConnectionStrings["conexao"].ConnectionString;
+    MySqlConnection mysql = new MySqlConnection(conexao);
+    mysql.Open();
 
     MySqlCommand cmdBusca = new MySqlCommand(sqlBusca, mysql);
 
@@ -176,3 +231,46 @@ void buscarCliente()
         Console.WriteLine("Cliente não encontrado.");
     }
 }
+
+void buscarProduto()
+{
+    Console.WriteLine("Digite o nome do produto que deseja buscar: ");
+
+    string nomeProduto = Console.ReadLine();
+
+    string sqlBusca = "SELECT * FROM tbprodutos WHERE nome LIKE @Nome";
+
+    string conexao = ConfigurationManager.ConnectionStrings["conexao"].ConnectionString;
+    MySqlConnection mysql = new MySqlConnection(conexao);
+    mysql.Open();
+
+    MySqlCommand cmdBusca = new MySqlCommand(sqlBusca, mysql);
+
+    cmdBusca.Parameters.AddWithValue("@Nome", "%" + nomeProduto + "%");
+    MySqlDataReader readerBusca = cmdBusca.ExecuteReader();
+
+    if (readerBusca.HasRows)
+    {
+        while (readerBusca.Read())
+        {
+            Console.WriteLine(readerBusca["idProdutos"].ToString() + " - " + readerBusca["nome"].ToString());
+        }
+    }
+    else
+    {
+        Console.WriteLine("Produto não encontrado.");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

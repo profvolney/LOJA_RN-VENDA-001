@@ -1548,23 +1548,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jason.vsilva\\.nuget\\packages\\": {},
+    "C:\\Users\\jason\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jason.vsilva\\Desktop\\LOJA\\LOJA\\LOJA.csproj",
+      "projectUniqueName": "C:\\Users\\jason\\source\\repos\\LOJA_RN-VENDA-001\\LOJA.csproj",
       "projectName": "LOJA",
-      "projectPath": "C:\\Users\\jason.vsilva\\Desktop\\LOJA\\LOJA\\LOJA.csproj",
-      "packagesPath": "C:\\Users\\jason.vsilva\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jason.vsilva\\Desktop\\LOJA\\LOJA\\obj\\",
+      "projectPath": "C:\\Users\\jason\\source\\repos\\LOJA_RN-VENDA-001\\LOJA.csproj",
+      "packagesPath": "C:\\Users\\jason\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jason\\source\\repos\\LOJA_RN-VENDA-001\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\jason.vsilva\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jason\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -1573,6 +1573,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1618,7 +1619,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

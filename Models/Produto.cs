@@ -4,4 +4,5 @@ public class Produto
     public string Nome { get; set; }
     public decimal PrecoUnitario { get; set; }
     public bool isPromocao { get; set; }
+
 }
